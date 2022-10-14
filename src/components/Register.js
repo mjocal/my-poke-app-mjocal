@@ -3,6 +3,7 @@ import {
   Card,
   CardMedia,
   CardContent,
+  Alert,
   Typography,
   CardActions,
   Button,
@@ -18,12 +19,12 @@ export default function Register() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmationRef = useRef();
-  const { register } = useAuth;
+  const { register } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  async function handleSubmit(event) {
-    event.preventDefault();
+  async function handleSubmit(e) {
+    e.preventDefault();
 
     if (passwordRef.current.value !== passwordConfirmationRef.current.value) {
       return setError("Passwords do not match");
@@ -36,6 +37,8 @@ export default function Register() {
     } catch {
       setError("Account creation failed");
     }
+
+    setLoading(false);
   }
 
   return (
@@ -52,43 +55,46 @@ export default function Register() {
             <Typography gutterBottom variant="h5" component="div">
               Sign Up
             </Typography>
-            <Container></Container>
-            <FormControl variant="standard" fullWidth={true}>
-              <InputLabel htmlFor="component-simple">Email</InputLabel>
-              <Input id="email" type="email" inputRef={emailRef} required />
-            </FormControl>
-            <br />
-            <FormControl variant="standard" fullWidth={true}>
-              <InputLabel htmlFor="component-simple">Password</InputLabel>
-              <Input
-                id="password"
-                type="password"
-                inputRef={passwordRef}
-                required
-              />
-            </FormControl>
-            <br />
-            <FormControl variant="standard" fullWidth={true}>
-              <InputLabel htmlFor="component-simple">
-                Confirm Password
-              </InputLabel>
-              <Input
-                id="password"
-                type="password"
-                inputRef={passwordConfirmationRef}
-                required
-              />
-            </FormControl>
-            <Button
-              size="medium"
-              variant="contained"
-              disabled
-              style={{
-                marginTop: "1rem",
-              }}
-            >
-              Register
-            </Button>
+            {error && <Alert severity="error">{error}</Alert>}
+            <form onSubmit={handleSubmit}>
+              <FormControl variant="standard" fullWidth={true}>
+                <InputLabel htmlFor="component-simple">Email</InputLabel>
+                <Input id="email" type="email" inputRef={emailRef} required />
+              </FormControl>
+              <br />
+              <FormControl variant="standard" fullWidth={true}>
+                <InputLabel htmlFor="component-simple">Password</InputLabel>
+                <Input
+                  id="password"
+                  type="password"
+                  inputRef={passwordRef}
+                  required
+                />
+              </FormControl>
+              <br />
+              <FormControl variant="standard" fullWidth={true}>
+                <InputLabel htmlFor="component-simple">
+                  Confirm Password
+                </InputLabel>
+                <Input
+                  id="confirmPassword"
+                  type="password"
+                  inputRef={passwordConfirmationRef}
+                  required
+                />
+              </FormControl>
+              <Button
+                size="medium"
+                variant="contained"
+                type="submit"
+                disabled={loading}
+                style={{
+                  marginTop: "1rem",
+                }}
+              >
+                Register
+              </Button>
+            </form>
           </CardContent>
           <CardActions>
             <Typography variant="body2" color="text.secondary">

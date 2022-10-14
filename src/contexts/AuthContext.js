@@ -11,21 +11,21 @@ export function useAuth() {
 // authprovider = firebaseprovider
 export function AuthProvider({ children }) {
   // user == currentUser
-  const [user, setUser] = useState();
+  const [currentUser, setCurrentUser] = useState();
 
   // register == signup
-  async function register(email, password) {
+  function register(email, password) {
     auth.createUserWithEmailAndPassword(email, password);
   }
 
   const value = {
-    user,
+    currentUser,
     register,
   };
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChange((currentUser) => {
-      setUser(currentUser);
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setCurrentUser(user);
     });
     return unsubscribe;
   }, []);
