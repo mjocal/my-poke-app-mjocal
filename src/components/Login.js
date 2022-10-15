@@ -11,16 +11,15 @@ import {
   Input,
   InputLabel,
 } from "@mui/material";
-import banner from "./../store/images/sign-in/sign-in-banner.png";
+import banner from "./../store/images/sign-in/banner.jpg";
 import { Container } from "@mui/system";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function Register() {
+export default function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const passwordConfirmationRef = useRef();
-  const { register } = useAuth();
+  const { login } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -28,17 +27,13 @@ export default function Register() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    if (passwordRef.current.value !== passwordConfirmationRef.current.value) {
-      return setError("Passwords do not match");
-    }
-
     try {
       setError("");
       setLoading(true);
-      await register(emailRef.current.value, passwordRef.current.value);
+      await login(emailRef.current.value, passwordRef.current.value);
       navigate("/");
     } catch {
-      setError("Account creation failed");
+      setError("Log in failed");
     }
 
     setLoading(false);
@@ -56,7 +51,7 @@ export default function Register() {
         <Container>
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
-              Sign Up
+              Welcome back!
             </Typography>
             {error && <Alert severity="error">{error}</Alert>}
             <form onSubmit={handleSubmit}>
@@ -74,18 +69,6 @@ export default function Register() {
                   required
                 />
               </FormControl>
-              <br />
-              <FormControl variant="standard" fullWidth={true}>
-                <InputLabel htmlFor="component-simple">
-                  Confirm Password
-                </InputLabel>
-                <Input
-                  id="confirmPassword"
-                  type="password"
-                  inputRef={passwordConfirmationRef}
-                  required
-                />
-              </FormControl>
               <Button
                 size="medium"
                 variant="contained"
@@ -95,16 +78,16 @@ export default function Register() {
                   marginTop: "1rem",
                 }}
               >
-                Register
+                Log in
               </Button>
             </form>
           </CardContent>
           <CardActions>
             <Typography variant="body2" color="text.secondary">
-              Already have an account?
+              New to Pokemanazos ?
             </Typography>
-            <Button component={Link} to="/login" size="small">
-              Sign in here
+            <Button component={Link} to="/register" size="small">
+              Register here
             </Button>
           </CardActions>
         </Container>
