@@ -35,7 +35,6 @@ export default function Login() {
     } catch {
       setError("Log in failed");
     }
-
     setLoading(false);
   }
 

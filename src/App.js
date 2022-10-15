@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import { AuthProvider } from "./contexts/AuthContext";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Register from "./components/Register";
+import SignIn from "./components/SignIn";
 import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
 
@@ -17,7 +17,7 @@ function App() {
         <AuthProvider>
           <Routes>
             <Route path="/" element={<Dashboard />} />
-            <Route path="/register" element={<Register />} />
+            <Route path="/signin" element={<SignIn />} />
             <Route path="/login" element={<Login />} />
           </Routes>
         </AuthProvider>

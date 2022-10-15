@@ -1,12 +1,15 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { auth } from "./firebase";
+import { auth } from "./firebaseCredentials";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
-// authcontext = firebasecontext
-const AuthContext = createContext();
+const AuthContext = createContext({
+  app: null,
+  login: () => Promise.resolve(undefined),
+  register: () => Promise.resolve(undefined),
+});
 
 export function useAuth() {
   return useContext(AuthContext);
@@ -17,32 +20,32 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
 
-  // register == signup
-  function register(email, password) {
-    createUserWithEmailAndPassword(auth, email, password);
-  }
+  // si eventualmente no quiero usar firebase, esta es la funcion que podria cambiar (login y signin)
+  const signin = async (email, password) => {
+    const user = await createUserWithEmailAndPassword(auth, email, password);
+    setCurrentUser(user);
+    return user;
+  };
 
-  // si eventualmente no quiero usar firebase, esta es la funcion que podria cambiar (login y register)
-  function login(email, password) {
-    signInWithEmailAndPassword(auth, email, password);
-  }
-
-  const value = {
-    currentUser,
-    login,
-    register,
+  const login = async (email, password) => {
+    const user = await signInWithEmailAndPassword(auth, email, password);
+    setCurrentUser(user);
+    return user;
   };
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setCurrentUser(user);
-      setLoading(false);
-    });
-    return unsubscribe;
+    setCurrentUser(auth);
+    setLoading(false);
   }, []);
 
+  const contextValue = {
+    currentUser,
+    login,
+    signin,
+  };
+
   return (
-    <AuthContext.Provider value={value}>
+    <AuthContext.Provider value={contextValue}>
       {!loading && children}
     </AuthContext.Provider>
   );

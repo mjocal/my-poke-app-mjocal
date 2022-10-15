@@ -1,8 +1,7 @@
-import firebase from "firebase/compat/app";
-import "firebase/compat/auth";
-// import { useEffect } from "react";
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 
-const app = firebase.initializeApp({
+const app = initializeApp({
   apiKey: "AIzaSyDhMM4cemLAnHdHzub17bCGv-cFab-0dW0",
   authDomain: "reactproject-4c87f.firebaseapp.com",
   projectId: "reactproject-4c87f",
@@ -12,6 +11,6 @@ const app = firebase.initializeApp({
   measurementId: "G-78ZXXZEJ2X",
 });
 
-export const auth = app.auth();
+export const auth = getAuth();
 
 export default app;

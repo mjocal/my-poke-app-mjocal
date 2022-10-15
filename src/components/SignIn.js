@@ -16,11 +16,11 @@ import { Container } from "@mui/system";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function Register() {
+export default function SignIn() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmationRef = useRef();
-  const { register } = useAuth();
+  const { signin } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ export default function Register() {
     try {
       setError("");
       setLoading(true);
-      await register(emailRef.current.value, passwordRef.current.value);
+      await signin(emailRef.current.value, passwordRef.current.value);
       navigate("/");
     } catch {
       setError("Account creation failed");
@@ -56,7 +56,7 @@ export default function Register() {
         <Container>
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
-              Sign Up
+              Enter a new account
             </Typography>
             {error && <Alert severity="error">{error}</Alert>}
             <form onSubmit={handleSubmit}>
