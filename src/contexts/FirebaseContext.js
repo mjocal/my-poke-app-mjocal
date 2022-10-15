@@ -3,20 +3,21 @@ import { auth } from "./firebaseCredentials";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 
-const AuthContext = createContext({
+const FirebaseContext = createContext({
   app: null,
   login: () => Promise.resolve(undefined),
-  register: () => Promise.resolve(undefined),
+  signin: () => Promise.resolve(undefined),
+  // logout: () => Promise.resolve(undefined),
 });
 
 export function useAuth() {
-  return useContext(AuthContext);
+  return useContext(FirebaseContext);
 }
 
-// authprovider = firebaseprovider
-export function AuthProvider({ children }) {
+export function FirebaseProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
 
@@ -33,6 +34,10 @@ export function AuthProvider({ children }) {
     return user;
   };
 
+  function logout() {
+    return signOut(auth);
+  }
+
   useEffect(() => {
     setCurrentUser(auth);
     setLoading(false);
@@ -42,11 +47,12 @@ export function AuthProvider({ children }) {
     currentUser,
     login,
     signin,
+    logout,
   };
 
   return (
-    <AuthContext.Provider value={contextValue}>
+    <FirebaseContext.Provider value={contextValue}>
       {!loading && children}
-    </AuthContext.Provider>
+    </FirebaseContext.Provider>
   );
 }

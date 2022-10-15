@@ -13,14 +13,14 @@ import {
 } from "@mui/material";
 import banner from "./../store/images/sign-in/sign-in-banner.png";
 import { Container } from "@mui/system";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../contexts/FirebaseContext";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function SignIn() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmationRef = useRef();
-  const { signin } = useAuth();
+  const { signin, currentUser } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ export default function SignIn() {
       setError("");
       setLoading(true);
       await signin(emailRef.current.value, passwordRef.current.value);
-      navigate("/");
+      navigate("/menu");
     } catch {
       setError("Account creation failed");
     }
@@ -58,6 +58,7 @@ export default function SignIn() {
             <Typography gutterBottom variant="h5" component="div">
               Enter a new account
             </Typography>
+            {currentUser && currentUser.email}
             {error && <Alert severity="error">{error}</Alert>}
             <form onSubmit={handleSubmit}>
               <FormControl variant="standard" fullWidth={true}>

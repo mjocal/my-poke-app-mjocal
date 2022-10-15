@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import banner from "./../store/images/sign-in/banner.jpg";
 import { Container } from "@mui/system";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../contexts/FirebaseContext";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
@@ -31,7 +31,7 @@ export default function Login() {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
-      navigate("/");
+      navigate("/menu");
     } catch {
       setError("Log in failed");
     }
@@ -85,7 +85,7 @@ export default function Login() {
             <Typography variant="body2" color="text.secondary">
               New to Pokemanazos ?
             </Typography>
-            <Button component={Link} to="/register" size="small">
+            <Button component={Link} to="/signin" size="small">
               Register here
             </Button>
           </CardActions>
