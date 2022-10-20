@@ -36,7 +36,7 @@ export default function SignIn() {
       setError("");
       setLoading(true);
       await signin(emailRef.current.value, passwordRef.current.value);
-      navigate("/menu");
+      navigate("/home");
     } catch {
       setError("Account creation failed");
     }
@@ -45,7 +45,7 @@ export default function SignIn() {
   }
 
   return (
-    <>
+    <main>
       <Card sx={{ minWidth: 345, maxWidth: 500 }}>
         <CardMedia
           component="img"
@@ -110,6 +110,6 @@ export default function SignIn() {
           </CardActions>
         </Container>
       </Card>
-    </>
+    </main>
   );
 }

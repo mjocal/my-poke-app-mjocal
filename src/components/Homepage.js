@@ -29,7 +29,7 @@ export default function MainMenu() {
   }
 
   return (
-    <>
+    <main>
       <Card>
         <CardMedia component="img" image={forest} alt="forest image" />
         <Grid
@@ -102,6 +102,6 @@ export default function MainMenu() {
           </div>
         </Grid>
       </Card>
-    </>
+    </main>
   );
 }

@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import "../styles/global.scss";
 import {
   Card,
   CardMedia,
@@ -31,7 +32,7 @@ export default function Login() {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
-      navigate("/menu");
+      navigate("/home");
     } catch {
       setError("Log in failed");
     }
@@ -39,7 +40,7 @@ export default function Login() {
   }
 
   return (
-    <>
+    <main>
       <Card sx={{ minWidth: 345, maxWidth: 500 }}>
         <CardMedia
           component="img"
@@ -91,6 +92,6 @@ export default function Login() {
           </CardActions>
         </Container>
       </Card>
-    </>
+    </main>
   );
 }
