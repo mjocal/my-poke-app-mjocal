@@ -14,30 +14,42 @@ import {
 } from "@mui/material";
 import banner from "./../store/images/sign-in/banner.jpg";
 import { Container } from "@mui/system";
-import { useAuth } from "../contexts/FirebaseContext";
+import { useFirebaseAuth } from "../contexts/FirebaseContext";
 import { Link, useNavigate } from "react-router-dom";
+import { Formik } from "formik";
+import * as Yup from "yup";
+
+const MIN_PASSWORD_CHARACTERS = 8;
 
 export default function Login() {
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  const { login } = useAuth();
+  const { login } = useFirebaseAuth();
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-
+  const handleSubmit = async (email, password) => {
     try {
-      setError("");
-      setLoading(true);
-      await login(emailRef.current.value, passwordRef.current.value);
-      navigate("/home");
-    } catch {
+      await login(email, password);
+    } catch (error) {
       setError("Log in failed");
     }
-    setLoading(false);
-  }
+  };
+
+  //termina forma antigua
+
+  // // version majo
+  //   async function handleSubmit(e) {
+  //     e.preventDefault();
+
+  //     try {
+  //       setError("");
+  //       setLoading(true);
+  //       await login(emailRef.current.value, passwordRef.current.value);
+  //       navigate("/home");
+  //     } catch {
+  //       setError("Log in failed");
+  //     }
+  //     setLoading(false);
+  //   }
 
   return (
     <main>
@@ -56,16 +68,23 @@ export default function Login() {
             {error && <Alert severity="error">{error}</Alert>}
             <form onSubmit={handleSubmit}>
               <FormControl variant="standard" fullWidth={true}>
-                <InputLabel htmlFor="component-simple">Email</InputLabel>
-                <Input id="email" type="email" inputRef={emailRef} required />
+                <InputLabel htmlFor="email">Email</InputLabel>
+                <Input
+                  id="email"
+                  type="email"
+                  // inputRef={emailRef}
+                  // onChange={handleEmailChange}
+                  required
+                />
               </FormControl>
               <br />
               <FormControl variant="standard" fullWidth={true}>
-                <InputLabel htmlFor="component-simple">Password</InputLabel>
+                <InputLabel htmlFor="password">Password</InputLabel>
                 <Input
                   id="password"
                   type="password"
-                  inputRef={passwordRef}
+                  // inputRef={passwordRef}
+                  // onChange={handlePasswordChange}
                   required
                 />
               </FormControl>
@@ -73,7 +92,6 @@ export default function Login() {
                 size="medium"
                 variant="contained"
                 type="submit"
-                disabled={loading}
                 style={{
                   marginTop: "1rem",
                 }}

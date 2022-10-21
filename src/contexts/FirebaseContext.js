@@ -13,34 +13,40 @@ const FirebaseContext = createContext({
   // logout: () => Promise.resolve(undefined),
 });
 
-export function useAuth() {
-  return useContext(FirebaseContext);
-}
-
 export function FirebaseProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
-  const [loading, setLoading] = useState(true);
 
   // si eventualmente no quiero usar firebase, esta es la funcion que podria cambiar (login y signin)
   const signin = async (email, password) => {
-    const user = await createUserWithEmailAndPassword(auth, email, password);
-    setCurrentUser(user);
-    return user;
+    try {
+      const user = await createUserWithEmailAndPassword(auth, email, password);
+      setCurrentUser(user);
+      return user;
+    } catch (error) {
+      console.error("error", error);
+    }
   };
 
   const login = async (email, password) => {
-    const user = await signInWithEmailAndPassword(auth, email, password);
-    setCurrentUser(user);
-    return user;
+    try {
+      const user = await signInWithEmailAndPassword(auth, email, password);
+      setCurrentUser(user);
+      return user;
+    } catch (error) {
+      console.error("error", error);
+    }
   };
 
   function logout() {
-    return signOut(auth);
+    try {
+      return signOut(auth);
+    } catch (error) {
+      console.error("error", error);
+    }
   }
 
   useEffect(() => {
     setCurrentUser(auth);
-    setLoading(false);
   }, []);
 
   const contextValue = {
@@ -52,7 +58,9 @@ export function FirebaseProvider({ children }) {
 
   return (
     <FirebaseContext.Provider value={contextValue}>
-      {!loading && children}
+      {children}
     </FirebaseContext.Provider>
   );
 }
+
+export const useFirebaseAuth = () => useContext(FirebaseContext);

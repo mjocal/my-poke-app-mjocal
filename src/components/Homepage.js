@@ -10,11 +10,11 @@ import {
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import forest from "./../store/images/backgrounds/forest.jpg";
-import { useAuth } from "../contexts/FirebaseContext";
+import { useFirebaseAuth } from "../contexts/FirebaseContext";
 
 export default function MainMenu() {
   const [error, setError] = useState("");
-  const { currentUser, logout } = useAuth();
+  const { currentUser, logout } = useFirebaseAuth();
   const navigate = useNavigate();
 
   async function handleLogOut() {
