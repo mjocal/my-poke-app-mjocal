@@ -40,7 +40,7 @@ export default function MainMenu() {
         >
           <Typography
             gutterBottom
-            variant="h5"
+            variant="h3"
             component="div"
             style={{
               margin: "1rem auto",

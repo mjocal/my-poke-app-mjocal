@@ -1,11 +1,11 @@
 import React from "react";
 import { Card, CardContent, CardActionArea, Typography } from "@mui/material";
 
-export const PokemonCard = ({ key, image, name, id, type }) => {
+export const PokemonCard = ({ image, name, id, type }) => {
   return (
     <Card
-      id={key}
-      key={key}
+      id={id}
+      key={id}
       style={{
         width: 200,
         backgroundColor: "#FAFAFA",

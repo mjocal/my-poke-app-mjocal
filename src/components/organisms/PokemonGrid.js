@@ -39,9 +39,9 @@ export const PokemonGrid = () => {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        pokemon.map((item) => (
+        pokemon.map((item, i) => (
           <PokemonCard
-            key={item.id}
+            key={i}
             image={item.sprites.front_default}
             name={item.name}
             id={item.id}
