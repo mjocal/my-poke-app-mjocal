@@ -64,8 +64,8 @@ export default function MainMenu() {
             }}
           >
             <ButtonGroup variant="contained">
-              <Button component={Link} to="" disabled>
-                Go to Pokedex (WIP)
+              <Button component={Link} to="/pokedex">
+                Go to Pokedex
               </Button>
             </ButtonGroup>
           </div>

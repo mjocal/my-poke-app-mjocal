@@ -6,6 +6,7 @@ import SignIn from "../components/SignIn";
 import Homepage from "../components/Homepage";
 import Profile from "../components/Profile";
 import NotFound from "../components/NotFound";
+import Pokedex from "../components/Pokedex";
 
 export const RoutesList = () => {
   return (
@@ -16,6 +17,7 @@ export const RoutesList = () => {
         <Route path="/logIn" element={<Login />} />
         <Route path="/home" element={<Homepage />} />
         <Route path="/myProfile" element={<Profile />} />
+        <Route path="/pokedex" element={<Pokedex />} />
         <Route path="/error" element={<NotFound />} />
 
         {/* <Route

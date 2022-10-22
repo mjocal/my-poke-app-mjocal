@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import "../styles/global.scss";
 import {
   Card,
@@ -11,6 +11,7 @@ import {
   FormControl,
   Input,
   InputLabel,
+  FormHelperText,
 } from "@mui/material";
 import banner from "./../store/images/sign-in/sign-in-banner.png";
 import { Container } from "@mui/system";
@@ -31,6 +32,9 @@ const SignUpSchema = Yup.object().shape({
       ),
       "Password should be at least 8 characters long"
     ),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref("password"), null], "Passwords must match")
+    .required("Required"),
 });
 
 export default function SignIn() {
@@ -41,9 +45,9 @@ export default function SignIn() {
   const handleFormSubmit = async (values) => {
     try {
       await signin(values.email, values.password);
-      // navigate("/home");
+      navigate("/home");
     } catch (error) {
-      // console.error(error);
+      console.error(error);
       setError("Account creation failed");
     }
   };
@@ -54,6 +58,7 @@ export default function SignIn() {
         initialValues={{
           email: "",
           password: "",
+          confirmPassword: "",
         }}
         validationSchema={SignUpSchema}
         onSubmit={handleFormSubmit}
@@ -98,6 +103,9 @@ export default function SignIn() {
                       onChange={handleChange("email")}
                       onBlur={handleBlur("email")}
                     />
+                    <FormHelperText id="component-error-text">
+                      {touched.email && errors.email}
+                    </FormHelperText>
                   </FormControl>
                   <br />
                   <FormControl variant="standard" fullWidth={true}>
@@ -112,10 +120,29 @@ export default function SignIn() {
                       onChange={handleChange("password")}
                       onBlur={handleBlur("password")}
                     />
+                    <FormHelperText id="component-error-text">
+                      {touched.password && errors.password}
+                    </FormHelperText>
                   </FormControl>
-
+                  <br />
+                  <FormControl variant="standard" fullWidth={true}>
+                    <InputLabel htmlFor="confirmPassword">
+                      Confirm Password
+                    </InputLabel>
+                    <Input
+                      id="confirmPassword"
+                      type="password"
+                      label="Confirm Password"
+                      value={values.confirmPassword}
+                      onChange={handleChange("confirmPassword")}
+                      onBlur={handleBlur("confirmPassword")}
+                    />
+                  </FormControl>
+                  <FormHelperText id="component-error-text">
+                    {touched.confirmPassword && errors.confirmPassword}
+                  </FormHelperText>
                   <Button
-                    // loading={isSubmitting || isValidating}
+                    loading={isSubmitting || isValidating}
                     disabled={!isValid}
                     size="medium"
                     variant="contained"
