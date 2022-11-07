@@ -1,29 +1,30 @@
 import React, { useEffect, useState } from "react";
+import { PokemonProvider } from "../../contexts/PokemonContext";
+
 import StyledPokedexGrid from "../shared/styledPokedexGrid";
 import { PokemonCard } from "../molecules/PokemonCard";
 
 export const PokemonGrid = () => {
-  const [pokemon, setPokemon] = useState({});
-  const [result, setResult] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [pokemon, setPokemon] = useState({});
 
-  const pokemonArray = [];
+  async function getPokemons() {
+    try {
+      const data = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=20`)
+        .then((response) => response.json())
+        .then((data) => {
+          return data;
+        });
 
-  async function getAllData() {
-    const [respPokemonList] = await Promise.all([
-      fetch("https://pokeapi.co/api/v2/pokemon?limit=5"),
-    ]);
-
-    const [pokemonListData] = await Promise.all([respPokemonList.json()]);
-
-    setResult(
-      pokemonListData.results.map((item) => {
-        fetch(item.url)
-          .then((response) => response.json())
-          .then((allpokemon) => pokemonArray.push(allpokemon));
-        setPokemon(pokemonArray);
-      })
-    );
+      const pokemonArray = await Promise.all(
+        data.results.map((item) =>
+          fetch(item.url).then((response) => response.json())
+        )
+      );
+      setPokemon(pokemonArray);
+    } catch (error) {
+      console.log("error: ", error);
+    }
   }
 
   setTimeout(() => {
@@ -31,11 +32,12 @@ export const PokemonGrid = () => {
   }, 1000);
 
   useEffect(() => {
-    getAllData();
+    getPokemons();
   }, []);
 
   return (
     <StyledPokedexGrid>
+      <PokemonProvider></PokemonProvider>
       {loading ? (
         <p>Loading...</p>
       ) : (

@@ -17,6 +17,12 @@ import { Container } from "@mui/system";
 import { useFirebaseAuth } from "../contexts/FirebaseContext";
 import { Link, useNavigate } from "react-router-dom";
 import { Formik } from "formik";
+import * as Yup from "yup";
+
+const LoginSchema = Yup.object().shape({
+  email: Yup.string().email("Please check email").required(),
+  password: Yup.string().required(),
+});
 
 export default function Login() {
   const { login } = useFirebaseAuth();
@@ -41,6 +47,7 @@ export default function Login() {
           email: "",
           password: "",
         }}
+        validationSchema={LoginSchema}
         onSubmit={handleFormSubmit}
         validateOnBlur
         validateOnChange
