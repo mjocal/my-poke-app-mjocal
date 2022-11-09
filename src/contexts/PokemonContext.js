@@ -1,19 +1,45 @@
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useMemo,
-  useCallback,
-} from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 const PokemonContext = createContext({
   pokemon: [],
   selectedTeam: [],
+  loading: undefined,
+  getPokemons: () => Promise.resolve(),
   getNextPokemon: () => Promise.resolve(),
   getPreviousPokemon: () => Promise.resolve(),
 });
 
 export function PokemonProvider({ children }) {
+  const [loading, setLoading] = useState(true);
+  const [pokemon, setPokemon] = useState({});
+
+  async function getPokemons() {
+    try {
+      const data = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=25`)
+        .then((response) => response.json())
+        .then((data) => {
+          return data;
+        });
+
+      const pokemonArray = await Promise.all(
+        data.results.map((item) =>
+          fetch(item.url).then((response) => response.json())
+        )
+      );
+      setPokemon(pokemonArray);
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  }
+
+  setTimeout(() => {
+    setLoading(false);
+  }, 1000);
+
+  useEffect(() => {
+    getPokemons();
+  }, []);
+
   // export funcion PokeApiContextProvider({ children }) {
   // // const { firebaseUser } = useFirebase();
   // const [pokemonLimit, setPokemonLimit] = useState(20);
@@ -48,7 +74,14 @@ export function PokemonProvider({ children }) {
   //   [pokemon, getNextPokemon, getPreviousPokemon, selectedTeam]
   // );
 
-  const contextValue = "";
+  const contextValue = {
+    pokemon,
+    // selectedTeam,
+    loading,
+    getPokemons,
+    // getNextPokemon,
+    // getPreviousPokemon,
+  };
 
   return (
     <PokemonContext.Provider value={contextValue}>

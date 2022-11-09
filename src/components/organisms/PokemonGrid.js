@@ -1,43 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { PokemonProvider } from "../../contexts/PokemonContext";
+import React from "react";
+import { usePokemonApi } from "../../contexts/PokemonContext";
 
 import StyledPokedexGrid from "../shared/styledPokedexGrid";
 import { PokemonCard } from "../molecules/PokemonCard";
 
 export const PokemonGrid = () => {
-  const [loading, setLoading] = useState(true);
-  const [pokemon, setPokemon] = useState({});
-
-  async function getPokemons() {
-    try {
-      const data = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=20`)
-        .then((response) => response.json())
-        .then((data) => {
-          return data;
-        });
-
-      const pokemonArray = await Promise.all(
-        data.results.map((item) =>
-          fetch(item.url).then((response) => response.json())
-        )
-      );
-      setPokemon(pokemonArray);
-    } catch (error) {
-      console.log("error: ", error);
-    }
-  }
-
-  setTimeout(() => {
-    setLoading(false);
-  }, 1000);
-
-  useEffect(() => {
-    getPokemons();
-  }, []);
+  const { pokemon, loading } = usePokemonApi();
 
   return (
     <StyledPokedexGrid>
-      <PokemonProvider></PokemonProvider>
       {loading ? (
         <p>Loading...</p>
       ) : (

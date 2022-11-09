@@ -10,7 +10,7 @@ const FirebaseContext = createContext({
   app: null,
   login: () => Promise.resolve(undefined),
   signin: () => Promise.resolve(undefined),
-  // logout: () => Promise.resolve(undefined),
+  logout: () => Promise.resolve(undefined),
 });
 
 export function FirebaseProvider({ children }) {
