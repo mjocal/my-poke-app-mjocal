@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { usePokemonApi } from "../../contexts/PokemonContext";
 
 import StyledPokedexGrid from "../shared/styledPokedexGrid";
 import { PokemonCard } from "../molecules/PokemonCard";
 
 export const PokemonGrid = () => {
-  const { pokemon, loading } = usePokemonApi();
+  const { pokemon } = usePokemonApi();
+  const [loading, setLoading] = useState(true);
+
+  setTimeout(() => {
+    setLoading(false);
+  }, 1000);
 
   return (
     <StyledPokedexGrid>
