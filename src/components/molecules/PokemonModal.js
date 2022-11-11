@@ -7,12 +7,25 @@ import {
   Typography,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import { usePokemonApi } from "../../contexts/PokemonContext";
 
-export const PokemonModal = ({ open, close, id }) => {
+export const PokemonModal = ({
+  open,
+  close,
+  id,
+  name,
+  type,
+  height,
+  weight,
+  hp,
+  moveA,
+  moveB,
+}) => {
+  const { attackPowerA, attackPowerB } = usePokemonApi();
   return (
     <Dialog open={open} onClose={close}>
       <DialogTitle sx={{ m: 0, p: 2 }}>
-        Basic Info {id}
+        Basic Info {id} {name} {moveA} {attackPowerA}
         {close ? (
           <IconButton
             aria-label="close"
@@ -30,9 +43,10 @@ export const PokemonModal = ({ open, close, id }) => {
       </DialogTitle>
       <DialogContent dividers>
         <Typography gutterBottom>
-          Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-          dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-          consectetur ac, vestibulum at eros.
+          {moveA} - {attackPowerA}
+        </Typography>
+        <Typography gutterBottom>
+          {moveB} - {attackPowerB}
         </Typography>
       </DialogContent>
     </Dialog>

@@ -3,8 +3,20 @@ import { Card, CardContent, CardActionArea, Typography } from "@mui/material";
 import { usePokemonApi } from "../../contexts/PokemonContext";
 import { PokemonModal } from "./PokemonModal";
 
-export const PokemonCard = ({ image, name, id, type }) => {
-  const { getPokemonData } = usePokemonApi();
+export const PokemonCard = ({
+  image,
+  name,
+  id,
+  type,
+  height,
+  weight,
+  hp,
+  moveA,
+  moveB,
+  moveC,
+  moveD,
+}) => {
+  const { getPokemonData, getMovePowerA, getMovePowerB } = usePokemonApi();
   const [open, setOpen] = useState(false);
 
   const handleClose = () => {
@@ -19,6 +31,11 @@ export const PokemonCard = ({ image, name, id, type }) => {
     getPokemonData(id);
   };
 
+  const handleMovePowers = (moveA, moveB) => {
+    getMovePowerA(moveA);
+    getMovePowerB(moveB);
+  };
+
   return (
     <>
       <Card
@@ -31,24 +48,36 @@ export const PokemonCard = ({ image, name, id, type }) => {
         onClick={() => {
           handleOpen();
           handlePokemonId(id);
+          handleMovePowers(moveA, moveB);
         }}
       >
         <CardActionArea>
           <img src={image} alt="pokemon" />
           <CardContent>
-            <Typography gutterBottom variant="h6" component="div">
+            <Typography variant="h6" component="div">
+              # {id} {type}
+            </Typography>
+            <Typography gutterBottom variant="h5" component="div">
               {name}
-            </Typography>
-            <Typography gutterBottom variant="p" component="div">
-              Id: {id}
-            </Typography>
-            <Typography gutterBottom variant="p" component="div">
-              Type: {type}
             </Typography>
           </CardContent>
         </CardActionArea>
       </Card>
-      <PokemonModal open={open} close={handleClose} id={id} />
+      <PokemonModal
+        open={open}
+        close={handleClose}
+        id={id}
+        name={name}
+        type={type}
+        height={height}
+        weight={weight}
+        hp={hp}
+        moveA={moveA}
+        moveB={moveB}
+        moveC={moveC}
+        moveD={moveD}
+        image={image}
+      />
     </>
   );
 };
