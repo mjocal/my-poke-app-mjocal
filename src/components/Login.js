@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "../styles/global.scss";
 import {
-  Card,
   CardMedia,
   CardContent,
   Alert,
@@ -18,6 +17,7 @@ import { useFirebaseAuth } from "../contexts/FirebaseContext";
 import { Link, useNavigate } from "react-router-dom";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import StyledFormCard from "./shared/styledFormCard";
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email("Please check email").required(),
@@ -64,13 +64,8 @@ export default function Login() {
           isValid,
           isValidating,
         }) => (
-          <Card sx={{ minWidth: 345, maxWidth: 500 }}>
-            <CardMedia
-              component="img"
-              height="140"
-              image={banner}
-              alt="pokemon banner"
-            />
+          <StyledFormCard>
+            <CardMedia component="img" image={banner} alt="pokemon banner" />
             <Container>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
@@ -127,7 +122,7 @@ export default function Login() {
                 </Button>
               </CardActions>
             </Container>
-          </Card>
+          </StyledFormCard>
         )}
       </Formik>
     </main>

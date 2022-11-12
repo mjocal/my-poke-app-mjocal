@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "../styles/global.scss";
 import {
-  Card,
   CardMedia,
   CardContent,
   Alert,
@@ -13,12 +12,13 @@ import {
   InputLabel,
   FormHelperText,
 } from "@mui/material";
-import banner from "./../store/images/sign-in/sign-in-banner.png";
+import banner from "./../store/images/sign-in/register.jpeg";
 import { Container } from "@mui/system";
 import { useFirebaseAuth } from "../contexts/FirebaseContext";
 import { Link, useNavigate } from "react-router-dom";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import StyledFormCard from "./shared/styledFormCard";
 
 const MIN_PASSWORD_CHARACTERS = 8;
 
@@ -77,13 +77,8 @@ export default function SignIn() {
           isValid,
           isValidating,
         }) => (
-          <Card sx={{ minWidth: 345, maxWidth: 500 }}>
-            <CardMedia
-              component="img"
-              height="140"
-              image={banner}
-              alt="pokemon banner"
-            />
+          <StyledFormCard>
+            <CardMedia component="img" image={banner} alt="pokemon banner" />
             <Container>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
@@ -164,7 +159,7 @@ export default function SignIn() {
                 </Button>
               </CardActions>
             </Container>
-          </Card>
+          </StyledFormCard>
         )}
       </Formik>
     </main>

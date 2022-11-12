@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  Card,
   CardMedia,
   Button,
   ButtonGroup,
@@ -9,8 +8,9 @@ import {
   Typography,
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-import forest from "./../store/images/backgrounds/forest.jpg";
+import homepage from "./../store/images/backgrounds/homepage.jpg";
 import { useFirebaseAuth } from "../contexts/FirebaseContext";
+import StyledFormCard from "./shared/styledFormCard";
 
 export default function MainMenu() {
   const [error, setError] = useState("");
@@ -30,14 +30,12 @@ export default function MainMenu() {
 
   return (
     <main>
-      <Card>
-        <CardMedia component="img" image={forest} alt="forest image" />
-        <Grid
-          container
-          direction="column"
-          justifyContent="center"
-          alignItems="center"
-        >
+      <StyledFormCard
+        sx={{ minWidth: 500 }}
+        style={{ backgroundColor: "f4ffe6" }}
+      >
+        <CardMedia component="img" image={homepage} alt="homepage image" />
+        <Grid>
           <Typography
             gutterBottom
             variant="h3"
@@ -101,7 +99,7 @@ export default function MainMenu() {
             </ButtonGroup>
           </div>
         </Grid>
-      </Card>
+      </StyledFormCard>
     </main>
   );
 }

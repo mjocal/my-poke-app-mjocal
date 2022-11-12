@@ -1,14 +1,15 @@
 import React from "react";
 import "../styles/global.scss";
-import { Card, CardMedia, Button, ButtonGroup } from "@mui/material";
+import { CardMedia, Button, ButtonGroup } from "@mui/material";
 import welcome from "./../store/images/Welcome/welcome.jpg";
 import { Link } from "react-router-dom";
 import StyledCardActions from "./shared/styledCardActions";
+import StyledFormCard from "./shared/styledFormCard";
 
 export default function Dashboard() {
   return (
     <main>
-      <Card>
+      <StyledFormCard>
         <CardMedia component="img" image={welcome} alt="welcome image" />
         <StyledCardActions>
           <ButtonGroup variant="contained" size="large">
@@ -22,7 +23,7 @@ export default function Dashboard() {
             </Button>
           </ButtonGroup>
         </StyledCardActions>
-      </Card>
+      </StyledFormCard>
     </main>
   );
 }
