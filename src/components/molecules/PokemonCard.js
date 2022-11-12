@@ -9,8 +9,6 @@ export const PokemonCard = ({
   name,
   id,
   type,
-  height,
-  weight,
   hp,
   moveA,
   moveB,

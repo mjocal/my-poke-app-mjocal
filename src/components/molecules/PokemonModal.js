@@ -73,17 +73,13 @@ export const PokemonModal = ({
               <Grid container justifyContent="center">
                 <img src={image} alt="pokemon" />
               </Grid>
-              <Typography
-                variant="h4"
-                sx={{ textTransform: "uppercase" }}
-                component="div"
-              >
+              <Typography variant="h5" sx={{ textTransform: "uppercase" }}>
                 {name}
               </Typography>
-              <Typography variant="h6" component="div">
+              <Typography sx={{ textTransform: "capitalize" }}>
                 Type: {type}
               </Typography>
-              <Typography gutterBottom variant="h6" component="div">
+              <Typography gutterBottom component="div">
                 HP: {hp}
               </Typography>
             </CardContent>
