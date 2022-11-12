@@ -32,7 +32,7 @@ export default function MainMenu() {
     <main>
       <StyledFormCard
         sx={{ minWidth: 500 }}
-        style={{ backgroundColor: "f4ffe6" }}
+        style={{ backgroundColor: "#e6f4ff" }}
       >
         <CardMedia component="img" image={homepage} alt="homepage image" />
         <Grid>
@@ -63,7 +63,7 @@ export default function MainMenu() {
           >
             <ButtonGroup variant="contained">
               <Button component={Link} to="/pokedex">
-                Go to Pokedex
+                View Pokedex
               </Button>
             </ButtonGroup>
           </div>
@@ -73,7 +73,7 @@ export default function MainMenu() {
             }}
           >
             <ButtonGroup variant="contained">
-              <Button component={Link} to="" disabled>
+              <Button component={Link} to="/myTeam">
                 Manage my Team (WIP)
               </Button>
             </ButtonGroup>

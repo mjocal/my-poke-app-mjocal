@@ -7,6 +7,7 @@ import Homepage from "../components/Homepage";
 import Profile from "../components/Profile";
 import NotFound from "../components/NotFound";
 import Pokedex from "../components/Pokedex";
+import Teams from "../components/Teams";
 
 export const RoutesList = () => {
   return (
@@ -18,6 +19,7 @@ export const RoutesList = () => {
         <Route path="/home" element={<Homepage />} />
         <Route path="/myProfile" element={<Profile />} />
         <Route path="/pokedex" element={<Pokedex />} />
+        <Route path="/myTeam" element={<Teams />} />
         <Route path="/error" element={<NotFound />} />
 
         {/* <Route
