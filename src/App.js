@@ -1,12 +1,15 @@
 import { FirebaseProvider } from "./contexts/FirebaseContext";
 import { PokemonProvider } from "./contexts/PokemonContext";
+import { PokemonMovesProvider } from "./contexts/PokemonMovesContext";
 import { RoutesList } from "./routes";
 
 function App() {
   return (
     <FirebaseProvider>
       <PokemonProvider>
-        <RoutesList />
+        <PokemonMovesProvider>
+          <RoutesList />
+        </PokemonMovesProvider>
       </PokemonProvider>
     </FirebaseProvider>
   );

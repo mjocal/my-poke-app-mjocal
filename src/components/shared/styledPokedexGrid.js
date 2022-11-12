@@ -5,6 +5,7 @@ const StyledPokedexGrid = styled.div`
   flex-wrap: wrap;
   align-items: flex-start;
   align-content: space-between;
+  justify-content: center;
   margin-bottom: 0;
   gap: 1rem;
 `;
