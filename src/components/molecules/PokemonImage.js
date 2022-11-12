@@ -1,5 +1,18 @@
 import React from "react";
+import { Card, CardContent } from "@mui/material";
 
-export default function PokemonImage() {
-  return <div>PokemonImage</div>;
-}
+export const PokemonImage = ({ image, name }) => {
+  return (
+    <Card
+      style={{
+        width: "8rem",
+        marginBottom: "0.5rem",
+        backgroundColor: "#fffded",
+      }}
+    >
+      <CardContent>
+        <img src={image} alt={name} />
+      </CardContent>
+    </Card>
+  );
+};

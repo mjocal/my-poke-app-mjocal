@@ -30,6 +30,22 @@ export default function Pokedex() {
             Back to home
           </Button>
         </ButtonGroup>
+        <ButtonGroup
+          variant="contained"
+          style={{
+            marginLeft: "5px",
+          }}
+        >
+          <Button
+            component={Link}
+            to="/myTeam"
+            style={{
+              backgroundColor: "#000",
+            }}
+          >
+            My Team
+          </Button>
+        </ButtonGroup>
       </StyledBackHomeDiv>
       <PokemonGrid />
     </Container>

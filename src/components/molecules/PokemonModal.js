@@ -109,7 +109,7 @@ export const PokemonModal = ({
             </CardContent>
           </Card>
         </StyledPokedexGrid>
-        <DialogActions>
+        {/* <DialogActions>
           <Grid container justifyContent="center">
             <Button
               variant="contained"
@@ -125,7 +125,7 @@ export const PokemonModal = ({
               Add to team
             </Button>
           </Grid>
-        </DialogActions>
+        </DialogActions> */}
       </DialogContent>
     </Dialog>
   );

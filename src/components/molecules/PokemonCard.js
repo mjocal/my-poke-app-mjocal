@@ -55,7 +55,7 @@ export const PokemonCard = ({
         }}
       >
         <CardActionArea>
-          <img src={image} alt="pokemon" />
+          <img src={image} alt={name} />
           <CardContent>
             <Typography variant="h6" component="div">
               #{id} {type}
