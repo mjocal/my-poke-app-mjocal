@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Card, CardContent, CardActionArea, Typography } from "@mui/material";
 import { usePokemonApi } from "../../contexts/PokemonContext";
 import { PokemonModal } from "./PokemonModal";
+import { usePokemonMovesApi } from "../../contexts/PokemonMovesContext";
 
 export const PokemonCard = ({
   image,
@@ -16,7 +17,9 @@ export const PokemonCard = ({
   moveC,
   moveD,
 }) => {
-  const { getPokemonData, getMovePowerA, getMovePowerB } = usePokemonApi();
+  const { getPokemonData } = usePokemonApi();
+  const { getMovePowerA, getMovePowerB, getMovePowerC, getMovePowerD } =
+    usePokemonMovesApi();
   const [open, setOpen] = useState(false);
 
   const handleClose = () => {
@@ -31,9 +34,11 @@ export const PokemonCard = ({
     getPokemonData(id);
   };
 
-  const handleMovePowers = (moveA, moveB) => {
+  const handleMovePowers = (moveA, moveB, moveC, moveD) => {
     getMovePowerA(moveA);
     getMovePowerB(moveB);
+    getMovePowerC(moveC);
+    getMovePowerD(moveD);
   };
 
   return (
@@ -43,21 +48,26 @@ export const PokemonCard = ({
         key={id}
         style={{
           width: 200,
-          backgroundColor: "#FAFAFA",
+          backgroundColor: "#fffded",
         }}
         onClick={() => {
           handleOpen();
           handlePokemonId(id);
-          handleMovePowers(moveA, moveB);
+          handleMovePowers(moveA, moveB, moveC, moveD);
         }}
       >
         <CardActionArea>
           <img src={image} alt="pokemon" />
           <CardContent>
             <Typography variant="h6" component="div">
-              # {id} {type}
+              #{id} {type}
             </Typography>
-            <Typography gutterBottom variant="h5" component="div">
+            <Typography
+              gutterBottom
+              variant="h5"
+              component="div"
+              sx={{ textTransform: "capitalize" }}
+            >
               {name}
             </Typography>
           </CardContent>
@@ -69,8 +79,6 @@ export const PokemonCard = ({
         id={id}
         name={name}
         type={type}
-        height={height}
-        weight={weight}
         hp={hp}
         moveA={moveA}
         moveB={moveB}

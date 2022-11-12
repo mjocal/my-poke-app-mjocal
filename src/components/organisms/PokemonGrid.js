@@ -30,17 +30,17 @@ export const PokemonGrid = () => {
             moveA={item.moves[0].move.name}
             moveB={
               typeof item.moves[1] === "undefined"
-                ? "hello!"
+                ? item.moves[0].move.name
                 : item.moves[1].move.name
             }
             moveC={
               typeof item.moves[2] === "undefined"
-                ? "hi!"
+                ? item.moves[0].move.name
                 : item.moves[2].move.name
             }
             moveD={
               typeof item.moves[3] === "undefined"
-                ? "morning!"
+                ? item.moves[0].move.name
                 : item.moves[3].move.name
             }
           />
