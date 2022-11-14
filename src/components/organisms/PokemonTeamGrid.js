@@ -1,6 +1,6 @@
 import React from "react";
-import { TeamLeftColumn } from "../molecules/TeamLeftColumn";
-import { TeamRightColumn } from "../molecules/TeamRightColumn";
+import { TeamLeftColumn } from "./TeamLeftColumn";
+import { TeamRightColumn } from "./TeamRightColumn";
 import StyledTeamGrid from "../shared/styledTeamGrid";
 
 export default function PokemonTeamGrid() {

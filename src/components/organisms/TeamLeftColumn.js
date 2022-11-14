@@ -3,7 +3,7 @@ import React from "react";
 import { usePokemonApi } from "../../contexts/PokemonContext";
 import StyledLeftColumn from "../shared/styledLeftColumn";
 
-import { PokemonInlineCard } from "./PokemonInlineCard";
+import { PokemonInlineCard } from "../molecules/PokemonInlineCard";
 
 export const TeamLeftColumn = () => {
   const { pokemon } = usePokemonApi();
