@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   Card,
   CardActions,
@@ -9,25 +8,29 @@ import {
 import React from "react";
 import { usePokemonApi } from "../../contexts/PokemonContext";
 import { PokemonImage } from "../molecules/PokemonImage";
-
 import StyledPokedexGrid from "../shared/styledPokedexGrid";
+import StyledRightColumn from "../shared/styledRightColumn";
 
 export const TeamRightColumn = () => {
   const { pokemon } = usePokemonApi();
 
   return (
-    <Box gridColumn="span 7">
+    <StyledRightColumn>
       <Card style={{ backgroundColor: "#ebf8ff", height: "60vh" }}>
-        <CardContent>
-          <Typography variant="h4" gutterBottom>
-            Available Teams
-          </Typography>
-          <div
-            style={{
-              overflow: "auto",
-              height: "50vh",
-            }}
-          >
+        <div
+          style={{
+            overflow: "auto",
+            height: "60vh",
+          }}
+        >
+          <CardContent>
+            <Typography variant="h4" gutterBottom>
+              Available Teams
+            </Typography>
+
+            <CardActions>
+              <Button size="small">Add Team</Button>
+            </CardActions>
             <Card
               style={{
                 marginBottom: "0.5rem",
@@ -89,9 +92,9 @@ export const TeamRightColumn = () => {
                 </CardActions>
               </Card>
             </div>
-          </div>
-        </CardContent>
+          </CardContent>
+        </div>
       </Card>
-    </Box>
+    </StyledRightColumn>
   );
 };

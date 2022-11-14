@@ -30,10 +30,7 @@ export default function MainMenu() {
 
   return (
     <main>
-      <StyledFormCard
-        sx={{ minWidth: 500 }}
-        style={{ backgroundColor: "#e6f4ff" }}
-      >
+      <StyledFormCard style={{ backgroundColor: "#e6f4ff" }}>
         <CardMedia component="img" image={homepage} alt="homepage image" />
         <Grid>
           <Typography

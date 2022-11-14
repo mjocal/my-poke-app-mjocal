@@ -1,6 +1,7 @@
-import { Box, Card, CardContent, Typography } from "@mui/material";
+import { Card, CardContent, Typography } from "@mui/material";
 import React from "react";
 import { usePokemonApi } from "../../contexts/PokemonContext";
+import StyledLeftColumn from "../shared/styledLeftColumn";
 
 import { PokemonInlineCard } from "./PokemonInlineCard";
 
@@ -8,7 +9,7 @@ export const TeamLeftColumn = () => {
   const { pokemon } = usePokemonApi();
 
   return (
-    <Box gridColumn="span 5">
+    <StyledLeftColumn>
       <Card
         style={{
           backgroundColor: "#ebf8ff",
@@ -58,6 +59,6 @@ export const TeamLeftColumn = () => {
           </div>
         </CardContent>
       </Card>
-    </Box>
+    </StyledLeftColumn>
   );
 };
