@@ -10,6 +10,7 @@ import {
   FormControl,
   Input,
   InputLabel,
+  FormHelperText,
 } from "@mui/material";
 import banner from "./../store/images/sign-in/banner.jpg";
 import { Container } from "@mui/system";
@@ -31,8 +32,7 @@ export default function Login() {
 
   const handleFormSubmit = async (values) => {
     try {
-      await login(values.email, values.password);
-      navigate("/home");
+      await login(values.email, values.password, navigate, "/home");
     } catch (error) {
       alert("failed login");
       console.error(error);
@@ -99,8 +99,12 @@ export default function Login() {
                       onChange={handleChange("password")}
                       onBlur={handleBlur("password")}
                     />
+                    <FormHelperText id="component-error-text">
+                      {touched.password && errors.password}
+                    </FormHelperText>
                   </FormControl>
                   <Button
+                    loading={isSubmitting || isValidating}
                     disabled={!isValid}
                     size="medium"
                     variant="contained"

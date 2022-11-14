@@ -5,6 +5,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
+import { Link, useNavigate } from "react-router-dom";
 
 const FirebaseContext = createContext({
   app: null,
@@ -15,24 +16,28 @@ const FirebaseContext = createContext({
 
 export function FirebaseProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
+  // const navigate = useNavigate();
 
   // si eventualmente no quiero usar firebase, esta es la funcion que podria cambiar (login y signin)
   const signin = async (email, password) => {
     try {
       const user = await createUserWithEmailAndPassword(auth, email, password);
       setCurrentUser(user);
+
       return user;
     } catch (error) {
       console.error("error", error);
     }
   };
 
-  const login = async (email, password) => {
+  const login = async (email, password, navigate, target = "/home") => {
     try {
       const user = await signInWithEmailAndPassword(auth, email, password);
       setCurrentUser(user);
+      navigate(target);
       return user;
     } catch (error) {
+      alert("Login failed");
       console.error("error", error);
     }
   };
