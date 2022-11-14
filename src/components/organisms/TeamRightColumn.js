@@ -12,13 +12,14 @@ import AddIcon from "@mui/icons-material/Add";
 import { usePokemonApi } from "../../contexts/PokemonContext";
 import { PokemonImage } from "../molecules/PokemonImage";
 import { PokemonTeamCard } from "../molecules/PokemonTeamCard";
-import StyledPokedexGrid from "../shared/styledPokedexGrid";
 import StyledRightColumn from "../shared/styledRightColumn";
+import { PokemonDialog } from "../molecules/PokemonDialog";
 
 export const TeamRightColumn = () => {
   const { pokemon } = usePokemonApi();
   const [teamCard, setTeamCard] = useState([]);
   const [value, setValue] = useState("");
+  const [open, setOpen] = useState(false);
 
   const handleAddTeam = () => {
     if (value !== "") {
@@ -26,12 +27,21 @@ export const TeamRightColumn = () => {
       setValue("");
     }
   };
+
   const handleValueChange = ({ target: { value } }) => {
     setValue(value);
   };
 
-  const handleDelete = (id) => {
+  const handleDeleteTeam = (id) => {
     setTeamCard(teamCard.filter((item, team) => team !== id));
+  };
+
+  const handleOpenList = () => {
+    setOpen(true);
+  };
+
+  const handleCloseList = () => {
+    setOpen(false);
   };
 
   return (
@@ -64,31 +74,41 @@ export const TeamRightColumn = () => {
             </Button>
           </CardActions>
           {teamCard.map((item, id) => (
-            <Card
-              key={id}
-              style={{
-                marginBottom: "0.5rem",
-              }}
-            >
-              <CardContent>
-                <Typography variant="h6" color="text.secondary" gutterBottom>
-                  Team {id + 1}: {item.name}
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small">Edit</Button>
-                <Button
-                  size="small"
-                  onClick={() => {
-                    handleDelete(id);
-                  }}
-                >
-                  Delete
-                </Button>
-              </CardActions>
-            </Card>
+            <>
+              <Card
+                key={id}
+                style={{
+                  marginBottom: "0.5rem",
+                }}
+              >
+                <CardContent>
+                  <Typography variant="h6" color="text.secondary" gutterBottom>
+                    Team {id + 1}: {item.name}
+                  </Typography>
+                  <PokemonDialog open={open} close={handleCloseList} />
+                </CardContent>
+                <CardActions>
+                  <Button
+                    size="small"
+                    onClick={() => {
+                      handleOpenList();
+                    }}
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    size="small"
+                    onClick={() => {
+                      handleDeleteTeam(id);
+                    }}
+                  >
+                    Delete
+                  </Button>
+                </CardActions>
+              </Card>
+            </>
           ))}
-          <Card
+          {/* <Card
             style={{
               marginBottom: "0.5rem",
             }}
@@ -115,7 +135,7 @@ export const TeamRightColumn = () => {
             <CardActions>
               <Button size="small">Edit</Button>
             </CardActions>
-          </Card>
+          </Card> */}
         </CardContent>
       </Card>
     </StyledRightColumn>
