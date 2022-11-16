@@ -15,12 +15,27 @@ import {
 import React, { useState } from "react";
 import { usePokemonApi } from "../../contexts/PokemonContext";
 
-export const PokemonDialog = ({ open, close, value }) => {
+export const PokemonDialog = ({ open, close, pokemonTeam }) => {
   const { pokemon } = usePokemonApi();
   const [pokemonValue, setPokemonValue] = useState([]);
 
-  const handleChange = (event) => {
-    setPokemonValue(event.target.value);
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: 48 * 4.5 + 8,
+        width: 250,
+      },
+    },
+  };
+
+  const handleChange = (e) => {
+    setPokemonValue(e.target.value);
+  };
+
+  const handleAddTeam = (e) => {
+    pokemonTeam = pokemonValue;
+    console.log("pokemonTeam", pokemonTeam);
+    close();
   };
 
   return (
@@ -41,6 +56,7 @@ export const PokemonDialog = ({ open, close, value }) => {
               multiple
               value={pokemonValue}
               onChange={handleChange}
+              MenuProps={MenuProps}
               style={{ width: "250px" }}
               input={<OutlinedInput label="Select Pokemon" />}
               renderValue={(selected) => selected.join(", ")}
@@ -57,7 +73,13 @@ export const PokemonDialog = ({ open, close, value }) => {
           </FormControl>
         </DialogContent>
         <DialogActions>
-          <Button onClick={close}>Add</Button>
+          <Button
+            onClick={() => {
+              handleAddTeam();
+            }}
+          >
+            Add
+          </Button>
           <Button onClick={close}>Cancel</Button>
         </DialogActions>
       </Dialog>
