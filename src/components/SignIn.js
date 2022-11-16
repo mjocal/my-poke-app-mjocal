@@ -137,7 +137,7 @@ export default function SignIn() {
                     {touched.confirmPassword && errors.confirmPassword}
                   </FormHelperText>
                   <Button
-                    loading={isSubmitting || isValidating}
+                    // loading={isSubmitting || isValidating}
                     disabled={!isValid}
                     size="medium"
                     variant="contained"

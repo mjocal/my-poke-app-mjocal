@@ -15,7 +15,7 @@ import {
 import React, { useState } from "react";
 import { usePokemonApi } from "../../contexts/PokemonContext";
 
-export const PokemonDialog = ({ open, close, pokemonTeam }) => {
+export const PokemonDialog = ({ open, close, pokemonTeam, value }) => {
   const { pokemon } = usePokemonApi();
   const [pokemonValue, setPokemonValue] = useState([]);
 
@@ -32,9 +32,11 @@ export const PokemonDialog = ({ open, close, pokemonTeam }) => {
     setPokemonValue(e.target.value);
   };
 
-  const handleAddTeam = (e) => {
+  const handleAddTeam = () => {
     pokemonTeam = pokemonValue;
+    value = pokemonValue;
     console.log("pokemonTeam", pokemonTeam);
+    console.log("value", value);
     close();
   };
 

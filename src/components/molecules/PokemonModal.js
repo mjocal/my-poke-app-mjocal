@@ -12,7 +12,6 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import { usePokemonMovesApi } from "../../contexts/PokemonMovesContext";
 import StyledPokedexGrid from "../shared/styledPokedexGrid";
-import { Link } from "react-router-dom";
 
 export const PokemonModal = ({
   open,
@@ -106,23 +105,6 @@ export const PokemonModal = ({
             </CardContent>
           </Card>
         </StyledPokedexGrid>
-        {/* <DialogActions>
-          <Grid container justifyContent="center">
-            <Button
-              variant="contained"
-              component={Link}
-              to="/myTeam"
-              sx={{ mt: 2, fontWeight: "bold", letterSpacing: 1 }}
-              style={{
-                backgroundColor: "#78c731",
-                color: "#ffffff",
-                textShadow: "1 1 #999",
-              }}
-            >
-              Add to team
-            </Button>
-          </Grid>
-        </DialogActions> */}
       </DialogContent>
     </Dialog>
   );

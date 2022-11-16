@@ -4,22 +4,43 @@ import {
   Card,
   CardActions,
   CardContent,
+  Checkbox,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
   FormControl,
   Input,
+  InputLabel,
+  ListItemText,
+  MenuItem,
+  OutlinedInput,
+  Select,
   Typography,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import { usePokemonApi } from "../../contexts/PokemonContext";
-import { PokemonImage } from "../molecules/PokemonImage";
-import { PokemonTeamCard } from "../molecules/PokemonTeamCard";
 import StyledRightColumn from "../shared/styledRightColumn";
-import { PokemonDialog } from "../molecules/PokemonDialog";
+import { usePokemonApi } from "../../contexts/PokemonContext";
 
 export const TeamRightColumn = () => {
-  const { pokemon } = usePokemonApi();
+  const [pokemonValue, setPokemonValue] = useState([]);
   const [teamCard, setTeamCard] = useState([]);
-  const [value, setValue] = useState("");
   const [open, setOpen] = useState(false);
+  const [value, setValue] = useState("");
+  const { pokemon } = usePokemonApi();
+
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: 48 * 4.5 + 8,
+        width: 250,
+      },
+    },
+  };
+
+  const handleChange = (e) => {
+    setPokemonValue(e.target.value);
+  };
 
   const handleAddTeam = () => {
     if (value !== "") {
@@ -34,6 +55,11 @@ export const TeamRightColumn = () => {
 
   const handleDeleteTeam = (id) => {
     setTeamCard(teamCard.filter((item, team) => team !== id));
+  };
+
+  const handleDisplayTeam = () => {
+    setPokemonValue(pokemonValue);
+    setOpen(false);
   };
 
   const handleOpenList = () => {
@@ -74,7 +100,7 @@ export const TeamRightColumn = () => {
             </Button>
           </CardActions>
           {teamCard.map((item, id) => (
-            <>
+            <div key={id}>
               <Card
                 key={id}
                 style={{
@@ -85,7 +111,66 @@ export const TeamRightColumn = () => {
                   <Typography variant="h6" color="text.secondary" gutterBottom>
                     Team {id + 1}: {item.name}
                   </Typography>
-                  <PokemonDialog open={open} close={handleCloseList} />
+                  {pokemonValue.map((i) => (
+                    <li key={i}>{i}</li>
+                  ))}
+                  {/* pending mover el dialogo a otro js */}
+                  {/* <PokemonDialog
+                    open={open}
+                    close={handleCloseList}
+                    pokemonTeam={pokemonTeam}
+                    value={value}
+                  /> */}
+                  <Dialog open={open} onClose={handleCloseList}>
+                    <DialogTitle
+                      sx={{
+                        m: 0,
+                        p: 2,
+                        fontWeight: "bold",
+                        textTransform: "uppercase",
+                      }}
+                      style={{
+                        backgroundColor: "#ff8177",
+                      }}
+                    >
+                      Select Pokemon
+                    </DialogTitle>
+                    <DialogContent>
+                      <FormControl sx={{ m: 1, minWidth: 80 }}>
+                        <InputLabel>Select Pokemon</InputLabel>
+                        <Select
+                          multiple
+                          value={pokemonValue}
+                          onChange={handleChange}
+                          MenuProps={MenuProps}
+                          style={{ width: "250px" }}
+                          input={<OutlinedInput label="Select Pokemon" />}
+                          renderValue={(selected) => selected.join(", ")}
+                        >
+                          {pokemon?.map((item) => {
+                            return (
+                              <MenuItem key={item.id} value={item.name}>
+                                <Checkbox
+                                  checked={pokemonValue.indexOf(item.name) > -1}
+                                />
+                                <ListItemText primary={item.name} />
+                              </MenuItem>
+                            );
+                          })}
+                        </Select>
+                      </FormControl>
+                    </DialogContent>
+                    <DialogActions>
+                      <Button
+                        onClick={() => {
+                          handleDisplayTeam();
+                        }}
+                      >
+                        Add
+                      </Button>
+                      <Button onClick={handleCloseList}>Cancel</Button>
+                    </DialogActions>
+                  </Dialog>
                 </CardContent>
                 <CardActions>
                   <Button
@@ -106,7 +191,7 @@ export const TeamRightColumn = () => {
                   </Button>
                 </CardActions>
               </Card>
-            </>
+            </div>
           ))}
           {/* <Card
             style={{
