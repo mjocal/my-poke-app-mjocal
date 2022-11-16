@@ -30,7 +30,7 @@ const SignUpSchema = Yup.object().shape({
       RegExp(
         `^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#a$%^&*])(?=.{${MIN_PASSWORD_CHARACTERS},})`
       ),
-      "Password should be at least 8 characters long"
+      "Password should be minimum 8 characters long and contain at least: 1 uppercase, 1 lowercase, 1 number and 1 special character"
     ),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password"), null], "Passwords must match")
