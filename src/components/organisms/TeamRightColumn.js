@@ -21,6 +21,7 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 import StyledRightColumn from "../shared/styledRightColumn";
 import { usePokemonApi } from "../../contexts/PokemonContext";
+import { Box } from "@mui/system";
 
 export const TeamRightColumn = () => {
   const [pokemonValue, setPokemonValue] = useState([]);
@@ -112,7 +113,19 @@ export const TeamRightColumn = () => {
                     Team {id + 1}: {item.name}
                   </Typography>
                   {pokemonValue.map((i) => (
-                    <li key={i}>{i}</li>
+                    <div>
+                      <Box
+                        key={i}
+                        sx={{
+                          border: 1,
+                          borderRadius: 2,
+                          borderColor: "#1976d2",
+                          mb: 1,
+                        }}
+                      >
+                        {i}
+                      </Box>
+                    </div>
                   ))}
                   {/* pending mover el dialogo a otro js */}
                   {/* <PokemonDialog
