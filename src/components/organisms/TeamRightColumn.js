@@ -25,6 +25,7 @@ import { Box } from "@mui/system";
 
 export const TeamRightColumn = () => {
   const [pokemonValue, setPokemonValue] = useState([]);
+  const [pokemonTeam, setPokemonTeam] = useState([]);
   const [teamCard, setTeamCard] = useState([]);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
@@ -127,63 +128,6 @@ export const TeamRightColumn = () => {
                       </Box>
                     </div>
                   ))}
-                  {/* pending mover el dialogo a otro js */}
-                  {/* <PokemonDialog
-                    open={open}
-                    close={handleCloseList}
-                    pokemonTeam={pokemonTeam}
-                    value={value}
-                  /> */}
-                  <Dialog open={open} onClose={handleCloseList}>
-                    <DialogTitle
-                      sx={{
-                        m: 0,
-                        p: 2,
-                        fontWeight: "bold",
-                        textTransform: "uppercase",
-                      }}
-                      style={{
-                        backgroundColor: "#ff8177",
-                      }}
-                    >
-                      Select Pokemon
-                    </DialogTitle>
-                    <DialogContent>
-                      <FormControl sx={{ m: 1, minWidth: 80 }}>
-                        <InputLabel>Select Pokemon</InputLabel>
-                        <Select
-                          multiple
-                          value={pokemonValue}
-                          onChange={handleChange}
-                          MenuProps={MenuProps}
-                          style={{ width: "250px" }}
-                          input={<OutlinedInput label="Select Pokemon" />}
-                          renderValue={(selected) => selected.join(", ")}
-                        >
-                          {pokemon?.map((item) => {
-                            return (
-                              <MenuItem key={item.id} value={item.name}>
-                                <Checkbox
-                                  checked={pokemonValue.indexOf(item.name) > -1}
-                                />
-                                <ListItemText primary={item.name} />
-                              </MenuItem>
-                            );
-                          })}
-                        </Select>
-                      </FormControl>
-                    </DialogContent>
-                    <DialogActions>
-                      <Button
-                        onClick={() => {
-                          handleDisplayTeam();
-                        }}
-                      >
-                        Add
-                      </Button>
-                      <Button onClick={handleCloseList}>Cancel</Button>
-                    </DialogActions>
-                  </Dialog>
                 </CardContent>
                 <CardActions>
                   <Button
@@ -236,6 +180,61 @@ export const TeamRightColumn = () => {
           </Card> */}
         </CardContent>
       </Card>
+      {/* pending mover el dialogo a otro js */}
+      {/* <PokemonDialog
+                    open={open}
+                    close={handleCloseList}
+                    pokemonTeam={pokemonTeam}
+                    value={value}
+                  /> */}
+      <Dialog open={open} onClose={handleCloseList}>
+        <DialogTitle
+          sx={{
+            m: 0,
+            p: 2,
+            fontWeight: "bold",
+            textTransform: "uppercase",
+          }}
+          style={{
+            backgroundColor: "#ff8177",
+          }}
+        >
+          Select Pokemon
+        </DialogTitle>
+        <DialogContent>
+          <FormControl sx={{ m: 1, minWidth: 80 }}>
+            <InputLabel>Select Pokemon</InputLabel>
+            <Select
+              multiple
+              value={pokemonValue}
+              onChange={handleChange}
+              MenuProps={MenuProps}
+              style={{ width: "250px" }}
+              input={<OutlinedInput label="Select Pokemon" />}
+              renderValue={(selected) => selected.join(", ")}
+            >
+              {pokemon?.map((item) => {
+                return (
+                  <MenuItem key={item.id} value={item.name}>
+                    <Checkbox checked={pokemonValue.indexOf(item.name) > -1} />
+                    <ListItemText primary={item.name} />
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={() => {
+              handleDisplayTeam();
+            }}
+          >
+            Add
+          </Button>
+          <Button onClick={handleCloseList}>Cancel</Button>
+        </DialogActions>
+      </Dialog>
     </StyledRightColumn>
   );
 };
