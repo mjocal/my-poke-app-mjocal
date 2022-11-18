@@ -40,18 +40,14 @@ export const TeamRightColumn = () => {
     },
   };
 
-  const handleChange = (e) => {
-    setPokemonValue(e.target.value);
-  };
-
-  const handleAddTeam = () => {
+  const handleAddNewTeam = () => {
     if (value !== "") {
       setTeamCard([...teamCard, { name: value }]);
       setValue("");
     }
   };
 
-  const handleValueChange = ({ target: { value } }) => {
+  const handleTeamName = ({ target: { value } }) => {
     setValue(value);
   };
 
@@ -59,16 +55,36 @@ export const TeamRightColumn = () => {
     setTeamCard(teamCard.filter((item, team) => team !== id));
   };
 
-  const handleDisplayTeam = () => {
-    setPokemonValue(pokemonValue);
+  const handleSelectMenu = (e) => {
+    setPokemonValue(e.target.value);
+  };
+
+  const handleDisplaySelectedPokemon = () => {
+    setPokemonTeam(
+      pokemonValue.map((i) => (
+        <div key={i}>
+          <Box
+            key={i}
+            sx={{
+              border: 1,
+              borderRadius: 2,
+              borderColor: "#1976d2",
+              mb: 1,
+            }}
+          >
+            {i}
+          </Box>
+        </div>
+      ))
+    );
     setOpen(false);
   };
 
-  const handleOpenList = () => {
+  const handleOpenModal = () => {
     setOpen(true);
   };
 
-  const handleCloseList = () => {
+  const handleCloseModal = () => {
     setOpen(false);
   };
 
@@ -89,14 +105,14 @@ export const TeamRightColumn = () => {
             <FormControl variant="standard">
               <Input
                 value={value}
-                onChange={handleValueChange}
+                onChange={handleTeamName}
                 placeholder="Enter New Team Name"
               />
             </FormControl>
             <Button
               size="small"
               endIcon={<AddIcon style={{ alignSelf: "flex-end" }} />}
-              onClick={handleAddTeam}
+              onClick={handleAddNewTeam}
             >
               Add
             </Button>
@@ -113,27 +129,13 @@ export const TeamRightColumn = () => {
                   <Typography variant="h6" color="text.secondary" gutterBottom>
                     Team {id + 1}: {item.name}
                   </Typography>
-                  {pokemonValue.map((i) => (
-                    <div>
-                      <Box
-                        key={i}
-                        sx={{
-                          border: 1,
-                          borderRadius: 2,
-                          borderColor: "#1976d2",
-                          mb: 1,
-                        }}
-                      >
-                        {i}
-                      </Box>
-                    </div>
-                  ))}
+                  {pokemonTeam}
                 </CardContent>
                 <CardActions>
                   <Button
                     size="small"
                     onClick={() => {
-                      handleOpenList();
+                      handleOpenModal();
                     }}
                   >
                     Edit
@@ -150,20 +152,7 @@ export const TeamRightColumn = () => {
               </Card>
             </div>
           ))}
-          {/* <Card
-            style={{
-              marginBottom: "0.5rem",
-            }}
-          >
-            <CardContent
-              style={{
-                overflow: "auto",
-              }}
-            >
-              <Typography variant="h6" color="text.secondary" gutterBottom>
-                Team 1: Name
-              </Typography>
-              <StyledPokedexGrid>
+          {/* <StyledPokedexGrid>
                 {pokemon.slice(24, 30).map((item, i) => (
                   <PokemonImage
                     key={i}
@@ -172,12 +161,7 @@ export const TeamRightColumn = () => {
                     image={item.sprites.front_default}
                   />
                 ))}
-              </StyledPokedexGrid>
-            </CardContent>
-            <CardActions>
-              <Button size="small">Edit</Button>
-            </CardActions>
-          </Card> */}
+              </StyledPokedexGrid> */}
         </CardContent>
       </Card>
       {/* pending mover el dialogo a otro js */}
@@ -187,7 +171,7 @@ export const TeamRightColumn = () => {
                     pokemonTeam={pokemonTeam}
                     value={value}
                   /> */}
-      <Dialog open={open} onClose={handleCloseList}>
+      <Dialog open={open} onClose={handleCloseModal}>
         <DialogTitle
           sx={{
             m: 0,
@@ -207,7 +191,7 @@ export const TeamRightColumn = () => {
             <Select
               multiple
               value={pokemonValue}
-              onChange={handleChange}
+              onChange={handleSelectMenu}
               MenuProps={MenuProps}
               style={{ width: "250px" }}
               input={<OutlinedInput label="Select Pokemon" />}
@@ -227,12 +211,12 @@ export const TeamRightColumn = () => {
         <DialogActions>
           <Button
             onClick={() => {
-              handleDisplayTeam();
+              handleDisplaySelectedPokemon();
             }}
           >
             Add
           </Button>
-          <Button onClick={handleCloseList}>Cancel</Button>
+          <Button onClick={handleCloseModal}>Cancel</Button>
         </DialogActions>
       </Dialog>
     </StyledRightColumn>
