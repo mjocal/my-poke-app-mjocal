@@ -5,23 +5,23 @@
 }
 
 .left-list-cyan {
-  background-color: #ebf8ff;
+  background-color: #ebf8ff !important;
   height: 60vh;
 }
 
 .right-list-cyan {
-  background-color: #ebf8ff;
+  background-color: #ebf8ff !important;
   height: 60vh;
   overflow: auto;
 }
 
 .light-yellow-card {
-  background-color: $light-yellow;
+  background-color: $light-yellow !important;
   width: 200px;
 }
 
 .light-yellow-image-card {
-  background-color: $light-yellow;
+  background-color: $light-yellow !important;
   width: 8rem;
   margin-bottom: 0.5rem;
 }

@@ -14,6 +14,7 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import { usePokemonMovesApi } from "../../contexts/PokemonMovesContext";
 import StyledPokedexGrid from "../shared/styledPokedexGrid";
+import StyledDialogTitle from "../shared/styledDialogTitle";
 
 export const PokemonModal = ({
   open,
@@ -32,10 +33,7 @@ export const PokemonModal = ({
     usePokemonMovesApi();
   return (
     <Dialog open={open} onClose={close}>
-      <DialogTitle
-        sx={{ m: 0, p: 2, fontWeight: "bold", textTransform: "uppercase" }}
-        className="salmon-bg"
-      >
+      <StyledDialogTitle className="salmon-bg">
         Basic Info
         {close ? (
           <IconButton
@@ -51,7 +49,7 @@ export const PokemonModal = ({
             <CloseIcon />
           </IconButton>
         ) : null}
-      </DialogTitle>
+      </StyledDialogTitle>
       <DialogContent dividers className="light-blue-bg">
         <StyledPokedexGrid>
           <Card className="white-bg align-self-center">

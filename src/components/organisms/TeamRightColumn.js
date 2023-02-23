@@ -22,8 +22,10 @@ import {
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import StyledRightColumn from "../shared/styledRightColumn";
+import StyledPokemonBox from "../shared/styledPokemonBox";
+import StyledDialogTitle from "../shared/styledDialogTitle";
+
 import { usePokemonApi } from "../../contexts/PokemonContext";
-import { Box } from "@mui/system";
 
 export const TeamRightColumn = () => {
   const [pokemonValue, setPokemonValue] = useState([]);
@@ -65,17 +67,7 @@ export const TeamRightColumn = () => {
     setPokemonTeam(
       pokemonValue.map((i) => (
         <div key={i}>
-          <Box
-            key={i}
-            sx={{
-              border: 1,
-              borderRadius: 2,
-              borderColor: "#1976d2",
-              mb: 1,
-            }}
-          >
-            {i}
-          </Box>
+          <StyledPokemonBox key={i}>{i}</StyledPokemonBox>
         </div>
       ))
     );
@@ -163,17 +155,9 @@ export const TeamRightColumn = () => {
                     value={value}
                   /> */}
       <Dialog open={open} onClose={handleCloseModal}>
-        <DialogTitle
-          sx={{
-            m: 0,
-            p: 2,
-            fontWeight: "bold",
-            textTransform: "uppercase",
-          }}
-          className="salmon-bg"
-        >
+        <StyledDialogTitle className="salmon-bg">
           Select Pokemon
-        </DialogTitle>
+        </StyledDialogTitle>
         <DialogContent>
           <FormControl sx={{ m: 1, minWidth: 80 }}>
             <InputLabel>Select Pokemon</InputLabel>

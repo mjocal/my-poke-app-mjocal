@@ -15,6 +15,7 @@ import {
   Select,
 } from "@mui/material";
 import { usePokemonApi } from "../../contexts/PokemonContext";
+import StyledDialogTitle from "../shared/styledDialogTitle";
 
 export const PokemonDialog = ({ open, close, pokemonTeam, value }) => {
   const { pokemon } = usePokemonApi();
@@ -44,12 +45,9 @@ export const PokemonDialog = ({ open, close, pokemonTeam, value }) => {
   return (
     <>
       <Dialog open={open} onClose={close}>
-        <DialogTitle
-          sx={{ m: 0, p: 2, fontWeight: "bold", textTransform: "uppercase" }}
-          className="salmon-bg"
-        >
+        <StyledDialogTitle className="salmon-bg">
           Select Pokemon
-        </DialogTitle>
+        </StyledDialogTitle>
         <DialogContent>
           <FormControl sx={{ m: 1, minWidth: 80 }}>
             <InputLabel>Select Pokemon</InputLabel>
