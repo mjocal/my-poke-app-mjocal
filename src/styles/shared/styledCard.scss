@@ -1,0 +1,37 @@
+@import "../variables.scss";
+
+.max-width-40 {
+  max-width: 40vw;
+}
+
+.left-list-cyan {
+  background-color: #ebf8ff;
+  height: 60vh;
+}
+
+.right-list-cyan {
+  background-color: #ebf8ff;
+  height: 60vh;
+  overflow: auto;
+}
+
+.light-yellow-card {
+  background-color: $light-yellow;
+  width: 200px;
+}
+
+.light-yellow-image-card {
+  background-color: $light-yellow;
+  width: 8rem;
+  margin-bottom: 0.5rem;
+}
+
+.white-inline-card {
+  display: inline-flex;
+  width: 15rem;
+}
+
+.card-overflow {
+  overflow: auto;
+  height: 50vh;
+}
