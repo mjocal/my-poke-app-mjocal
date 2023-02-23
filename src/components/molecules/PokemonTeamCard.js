@@ -9,11 +9,7 @@ import {
 
 export const PokemonTeamCard = (id, name, close) => {
   return (
-    <Card
-      style={{
-        marginBottom: "0.5rem",
-      }}
-    >
+    <Card className="margin-bottom-05">
       <CardContent>
         <Typography variant="h6" color="text.secondary" gutterBottom>
           Team {id}:

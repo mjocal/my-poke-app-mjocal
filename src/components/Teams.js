@@ -1,4 +1,5 @@
 import React from "react";
+import "../styles/global.scss";
 import { Typography, Button, ButtonGroup, Container } from "@mui/material";
 import { Link } from "react-router-dom";
 import StyledBackHomeDiv from "./shared/styledBackHomeDiv";
@@ -7,12 +8,7 @@ import PokemonTeamGrid from "./organisms/PokemonTeamGrid";
 
 export default function Teams() {
   return (
-    <Container
-      style={{
-        textAlign: "center",
-        padding: 0,
-      }}
-    >
+    <Container className="align-center">
       <StyledHeaderDiv>
         <Typography variant="h3" component="div">
           My Team
@@ -20,29 +16,12 @@ export default function Teams() {
       </StyledHeaderDiv>
       <StyledBackHomeDiv>
         <ButtonGroup variant="contained">
-          <Button
-            component={Link}
-            to="/home"
-            style={{
-              backgroundColor: "#000",
-            }}
-          >
+          <Button component={Link} to="/home" className="black-bg">
             Back to home
           </Button>
         </ButtonGroup>
-        <ButtonGroup
-          variant="contained"
-          style={{
-            marginLeft: "5px",
-          }}
-        >
-          <Button
-            component={Link}
-            to="/pokedex"
-            style={{
-              backgroundColor: "#000",
-            }}
-          >
+        <ButtonGroup variant="contained" className="margin-left-5">
+          <Button component={Link} to="/pokedex" className="black-bg">
             View Pokedex
           </Button>
         </ButtonGroup>

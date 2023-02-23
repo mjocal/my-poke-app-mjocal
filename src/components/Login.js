@@ -109,9 +109,7 @@ export default function Login() {
                     size="medium"
                     variant="contained"
                     type="submit"
-                    style={{
-                      marginTop: "1rem",
-                    }}
+                    className="margin-top-1"
                   >
                     Log in
                   </Button>

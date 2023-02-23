@@ -4,15 +4,11 @@ import { Link } from "react-router-dom";
 import { PokemonGrid } from "./organisms/PokemonGrid";
 import StyledBackHomeDiv from "./shared/styledBackHomeDiv";
 import StyledHeaderDiv from "./shared/styledHeaderDiv";
+import "../styles/global.scss";
 
 export default function Pokedex() {
   return (
-    <Container
-      style={{
-        textAlign: "center",
-        padding: 0,
-      }}
-    >
+    <Container className="align-center">
       <StyledHeaderDiv>
         <Typography variant="h3" component="div">
           Pokedex
@@ -20,29 +16,12 @@ export default function Pokedex() {
       </StyledHeaderDiv>
       <StyledBackHomeDiv>
         <ButtonGroup variant="contained">
-          <Button
-            component={Link}
-            to="/home"
-            style={{
-              backgroundColor: "#000",
-            }}
-          >
+          <Button component={Link} to="/home" className="black-bg">
             Back to home
           </Button>
         </ButtonGroup>
-        <ButtonGroup
-          variant="contained"
-          style={{
-            marginLeft: "5px",
-          }}
-        >
-          <Button
-            component={Link}
-            to="/myTeam"
-            style={{
-              backgroundColor: "#000",
-            }}
-          >
+        <ButtonGroup variant="contained" className="margin-left-5">
+          <Button component={Link} to="/myTeam" className="black-bg">
             My Team
           </Button>
         </ButtonGroup>

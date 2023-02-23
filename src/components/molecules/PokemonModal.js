@@ -1,4 +1,6 @@
 import * as React from "react";
+import "../../styles/global.scss";
+import "../../styles/shared/styledCard.scss";
 import {
   Card,
   CardContent,
@@ -32,9 +34,7 @@ export const PokemonModal = ({
     <Dialog open={open} onClose={close}>
       <DialogTitle
         sx={{ m: 0, p: 2, fontWeight: "bold", textTransform: "uppercase" }}
-        style={{
-          backgroundColor: "#ff8177",
-        }}
+        className="salmon-bg"
       >
         Basic Info
         {close ? (
@@ -52,19 +52,9 @@ export const PokemonModal = ({
           </IconButton>
         ) : null}
       </DialogTitle>
-      <DialogContent
-        dividers
-        style={{
-          backgroundColor: "#CEECF5",
-        }}
-      >
+      <DialogContent dividers className="light-blue-bg">
         <StyledPokedexGrid>
-          <Card
-            style={{
-              backgroundColor: "#FFF",
-              alignSelf: "center",
-            }}
-          >
+          <Card className="white-bg align-self-center">
             <CardContent>
               <Grid container justifyContent="center">
                 <img src={image} alt="pokemon" />
@@ -80,12 +70,7 @@ export const PokemonModal = ({
               </Typography>
             </CardContent>
           </Card>
-          <Card
-            style={{
-              backgroundColor: "#FFF",
-              alignSelf: "center",
-            }}
-          >
+          <Card className="white-bg align-self-center">
             <CardContent>
               <Typography variant="h5" gutterBottom component="div">
                 Attacks:

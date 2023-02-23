@@ -142,9 +142,7 @@ export default function SignIn() {
                     size="medium"
                     variant="contained"
                     type="submit"
-                    style={{
-                      marginTop: "1rem",
-                    }}
+                    className="margin-top-1"
                   >
                     Register
                   </Button>

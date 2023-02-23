@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+import "../../styles/global.scss";
 import {
   Button,
   Checkbox,
@@ -12,7 +14,6 @@ import {
   OutlinedInput,
   Select,
 } from "@mui/material";
-import React, { useState } from "react";
 import { usePokemonApi } from "../../contexts/PokemonContext";
 
 export const PokemonDialog = ({ open, close, pokemonTeam, value }) => {
@@ -45,9 +46,7 @@ export const PokemonDialog = ({ open, close, pokemonTeam, value }) => {
       <Dialog open={open} onClose={close}>
         <DialogTitle
           sx={{ m: 0, p: 2, fontWeight: "bold", textTransform: "uppercase" }}
-          style={{
-            backgroundColor: "#ff8177",
-          }}
+          className="salmon-bg"
         >
           Select Pokemon
         </DialogTitle>
@@ -59,7 +58,7 @@ export const PokemonDialog = ({ open, close, pokemonTeam, value }) => {
               value={pokemonValue}
               onChange={handleChange}
               MenuProps={MenuProps}
-              style={{ width: "250px" }}
+              className="width-250"
               input={<OutlinedInput label="Select Pokemon" />}
               renderValue={(selected) => selected.join(", ")}
             >

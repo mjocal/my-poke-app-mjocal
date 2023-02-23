@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../../styles/shared/styledCard.scss";
 import { Card, CardContent, CardActionArea, Typography } from "@mui/material";
 import { usePokemonApi } from "../../contexts/PokemonContext";
 import { PokemonModal } from "./PokemonModal";
@@ -44,10 +45,7 @@ export const PokemonCard = ({
       <Card
         id={id}
         key={id}
-        style={{
-          width: 200,
-          backgroundColor: "#fffded",
-        }}
+        className="light-yellow-card"
         onClick={() => {
           handleOpen();
           handlePokemonId(id);

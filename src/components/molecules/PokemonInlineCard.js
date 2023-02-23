@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import "../../styles/global.scss";
+import "../../styles/shared/styledCard.scss";
 import {
   Card,
   CardContent,
@@ -46,14 +48,8 @@ export const PokemonInlineCard = ({
   };
   return (
     <>
-      <Card
-        style={{
-          display: "inline-flex",
-          width: "15rem",
-          marginBottom: "0.5rem",
-        }}
-      >
-        <CardContent style={{ width: "100%" }}>
+      <Card className="white-inline-card margin-bottom-05">
+        <CardContent className="full-width">
           <Typography
             variant="p"
             color="text.secondary"

@@ -1,5 +1,7 @@
-import { Card, CardContent, Typography } from "@mui/material";
 import React from "react";
+import "../../styles/global.scss";
+import "../../styles/shared/styledCard.scss";
+import { Card, CardContent, Typography } from "@mui/material";
 import { usePokemonApi } from "../../contexts/PokemonContext";
 import StyledLeftColumn from "../shared/styledLeftColumn";
 
@@ -10,22 +12,12 @@ export const TeamLeftColumn = () => {
 
   return (
     <StyledLeftColumn>
-      <Card
-        style={{
-          backgroundColor: "#ebf8ff",
-          height: "60vh",
-        }}
-      >
+      <Card className="left-list-cyan">
         <CardContent>
           <Typography variant="h4" gutterBottom>
             Pokemon List
           </Typography>
-          <div
-            style={{
-              overflow: "auto",
-              height: "50vh",
-            }}
-          >
+          <div className="card-overflow">
             {pokemon.map((item, i) => (
               <div key={i}>
                 <PokemonInlineCard

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import "../../styles/global.scss";
+import "../../styles/shared/styledCard.scss";
 import {
   Button,
   Card,
@@ -90,13 +92,7 @@ export const TeamRightColumn = () => {
 
   return (
     <StyledRightColumn>
-      <Card
-        style={{
-          backgroundColor: "#ebf8ff",
-          height: "60vh",
-          overflow: "auto",
-        }}
-      >
+      <Card className="right-list-cyan">
         <CardContent>
           <Typography variant="h4" gutterBottom>
             Available Teams
@@ -119,12 +115,7 @@ export const TeamRightColumn = () => {
           </CardActions>
           {teamCard.map((item, id) => (
             <div key={id}>
-              <Card
-                key={id}
-                style={{
-                  marginBottom: "0.5rem",
-                }}
-              >
+              <Card key={id} className="margin-bottom-05">
                 <CardContent>
                   <Typography variant="h6" color="text.secondary" gutterBottom>
                     Team {id + 1}: {item.name}
@@ -179,9 +170,7 @@ export const TeamRightColumn = () => {
             fontWeight: "bold",
             textTransform: "uppercase",
           }}
-          style={{
-            backgroundColor: "#ff8177",
-          }}
+          className="salmon-bg"
         >
           Select Pokemon
         </DialogTitle>
@@ -193,7 +182,7 @@ export const TeamRightColumn = () => {
               value={pokemonValue}
               onChange={handleSelectMenu}
               MenuProps={MenuProps}
-              style={{ width: "250px" }}
+              className="width-250"
               input={<OutlinedInput label="Select Pokemon" />}
               renderValue={(selected) => selected.join(", ")}
             >

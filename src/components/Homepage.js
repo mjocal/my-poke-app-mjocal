@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../styles/global.scss";
 import {
   CardMedia,
   Button,
@@ -30,16 +31,14 @@ export default function MainMenu() {
 
   return (
     <main>
-      <StyledFormCard style={{ backgroundColor: "#e6f4ff" }}>
+      <StyledFormCard className="cyan-bg">
         <CardMedia component="img" image={homepage} alt="homepage image" />
         <Grid>
           <Typography
             gutterBottom
             variant="h3"
             component="div"
-            style={{
-              margin: "1rem auto",
-            }}
+            className="margin-1-auto"
           >
             Welcome {currentUser.email}
           </Typography>
@@ -53,44 +52,28 @@ export default function MainMenu() {
               </Button>
             </ButtonGroup>
           </div>
-          <div
-            style={{
-              marginTop: "1rem",
-            }}
-          >
+          <div className="margin-top-1">
             <ButtonGroup variant="contained">
               <Button component={Link} to="/pokedex">
                 View Pokedex
               </Button>
             </ButtonGroup>
           </div>
-          <div
-            style={{
-              marginTop: "1rem",
-            }}
-          >
+          <div className="margin-1-auto">
             <ButtonGroup variant="contained">
               <Button component={Link} to="/myTeam">
                 Manage my Team (WIP)
               </Button>
             </ButtonGroup>
           </div>
-          <div
-            style={{
-              marginTop: "1rem",
-            }}
-          >
+          <div className="margin-1-auto">
             <ButtonGroup variant="contained">
               <Button component={Link} to="" disabled>
                 BATTLE ! (WIP)
               </Button>
             </ButtonGroup>
           </div>
-          <div
-            style={{
-              margin: "1rem auto",
-            }}
-          >
+          <div className="margin-1-auto">
             <ButtonGroup variant="contained">
               <Button onClick={handleLogOut}>Log Out</Button>
             </ButtonGroup>
